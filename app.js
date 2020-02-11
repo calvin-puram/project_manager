@@ -3,6 +3,7 @@ const morgan = require('morgan');
 
 const usersRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
+const projectRoute = require('./routes/project');
 const globalError = require('./controller/globalError');
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/users', usersRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/projects', projectRoute);
 app.use(globalError);
 
 module.exports = app;
