@@ -33,6 +33,11 @@ const handleDuplicateError = err => {
   return new AppError(msg, 400);
 };
 
+const handleCastError = err => {
+  const msg = 'invalid id';
+  return new AppError(msg, 400);
+};
+
 module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
@@ -42,6 +47,7 @@ module.exports = (err, req, res, next) => {
 
     if (error.name === 'ValidationError') error = handleValidationError(error);
     if (error.code === 11000) error = handleDuplicateError(error);
+    if (error.name === 'CastError') error = handleCastError(error);
 
     sendErrorProd(error, res);
   }

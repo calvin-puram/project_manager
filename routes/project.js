@@ -8,7 +8,10 @@ const projectController = require('../controller/project');
 router
   .route('/')
   .get(projectController.getAllProjects)
-  .post(authController.protect, projectController.updateProject)
+  .post(authController.protect, projectController.createProject);
+
+router
+  .route('/me')
   .get(authController.protect, projectController.getUserProject);
 
 router

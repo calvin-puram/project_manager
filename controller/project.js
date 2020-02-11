@@ -19,7 +19,7 @@ exports.getAllProjects = catchAsync(async (req, res, next) => {
 //@route  Get /api/v1/projects/:id
 //@access private
 exports.getUserProject = catchAsync(async (req, res, next) => {
-  const projects = await Project.findById({ user: req.user.id });
+  const projects = await Project.find({ user: req.user.id });
 
   if (!projects) {
     return next(new AppError('no resource found', 404));
@@ -49,9 +49,9 @@ exports.createProject = catchAsync(async (req, res, next) => {
 //@route  Get /api/v1/projects/:id
 //@access private
 exports.updateProject = catchAsync(async (req, res, next) => {
-  let project = await Project.findById(req.user.id);
+  let project = await Project.findById(req.params.id);
 
-  if (project.user.toString() !== req.user.id) {
+  if (project.user._id.toString() !== req.user.id) {
     return next(new AppError('only owner can edit his project', 401));
   }
 
@@ -70,9 +70,9 @@ exports.updateProject = catchAsync(async (req, res, next) => {
 //@route  Get /api/v1/projects/:id
 //@access private
 exports.deleteProject = catchAsync(async (req, res, next) => {
-  let project = await Project.findById(req.user.id);
+  let project = await Project.findById(req.params.id);
 
-  if (project.user.toString() !== req.user.id) {
+  if (project.user._id.toString() !== req.user.id) {
     return next(new AppError('only owner can delete his project', 401));
   }
 

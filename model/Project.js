@@ -32,4 +32,12 @@ const ProjectSchema = new Schema({
   }
 });
 
+ProjectSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'user',
+    select: 'name'
+  });
+  next()
+});
+
 module.exports = mongoose.model('Projects', ProjectSchema);

@@ -76,7 +76,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 //@route  Get /api/v1/auth/profile
 //@access profile
 exports.profile = catchAsync(async (req, res, next) => {
-  const user = await Users.findById(req.user);
+  const user = await Users.findById(req.user.id);
   res.status(200).json({
     success: true,
     data: user
