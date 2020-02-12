@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const usersRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
@@ -13,6 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use('/api/v1/users', usersRoute);
 app.use('/api/v1/auth', authRoute);
