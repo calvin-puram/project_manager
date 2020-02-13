@@ -24,7 +24,7 @@ exports.getUserProject = catchAsync(async (req, res, next) => {
   if (!projects) {
     return next(new AppError('no resource found', 404));
   }
-  console.log(projects);
+  
   res.status(200).json({
     success: true,
     count: projects.length,

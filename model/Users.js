@@ -46,7 +46,10 @@ const UserSchema = new Schema({
     type: String,
     required: [true, 'your bio is required']
   },
-  image: String,
+  image: {
+    type: String,
+    default: '/img/users/default.jpg'
+  },
   createAt: {
     type: Date,
     default: Date.now
