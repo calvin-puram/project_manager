@@ -6,7 +6,7 @@ const AppError = require('../utils/Error');
 //@route  Get /api/v1/projects
 //@access public
 exports.getAllProjects = catchAsync(async (req, res, next) => {
-  const projects = await Project.find();
+  const projects = await Project.find().sort('-createdAt');
 
   res.status(200).json({
     success: true,
@@ -24,7 +24,7 @@ exports.getUserProject = catchAsync(async (req, res, next) => {
   if (!projects) {
     return next(new AppError('no resource found', 404));
   }
-  
+
   res.status(200).json({
     success: true,
     count: projects.length,
